@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const NOTION_TOKEN = process.env.NOTION_TOKEN;
-  const NOTION_DB_ID = '3748efb65ffd805196edd1e8a9f99ab6';
+  const NOTION_DB_ID = '3748efb65ffd806da7c1cdab094d8fbe';
 
   try {
     const data = req.body;
