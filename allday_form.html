@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무료 광고 진단 신청 — ALLDAY COMPANY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0A0A0A;
+  --black2:   #111111;
+  --black3:   #1A1A1A;
+  --black4:   #222222;
+  --white:    #FFFFFF;
+  --lime:     #C8F135;
+  --lime-dim: #A8D120;
+  --lime-pale:#1e2a00;
+  --red:      #E8321A;
+  --gray:     #888882;
+  --gray-lt:  #CCCCCA;
+  --border:   rgba(255,255,255,0.08);
+  --border-lime: rgba(200,241,53,0.25);
+  --bebas:    'Bebas Neue', sans-serif;
+  --noto:     'Noto Sans KR', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--noto);
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 64px;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--bebas); font-size: 20px; letter-spacing: 0.14em; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--lime); }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45);
+  text-decoration: none; transition: color .2s;
+}
+.nav-back:hover { color: var(--lime); }
+.nav-back::before { content: '←'; }
+
+/* ── PAGE LAYOUT ── */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 560px;
+  min-height: 100vh;
+  padding-top: 72px;
+}
+
+/* ── LEFT PANEL ── */
+.left-panel {
+  background: var(--black2);
+  padding: 80px 64px 80px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: sticky; top: 72px; height: calc(100vh - 72px);
+  overflow: hidden;
+}
+.left-panel::before {
+  content: '';
+  position: absolute; top: -150px; right: -150px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,241,53,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.left-panel::after {
+  content: '';
+  position: absolute; bottom: -80px; left: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,50,26,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.lp-content { position: relative; z-index: 1; }
+
+.lp-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--lime);
+  margin-bottom: 28px;
+}
+.lp-eyebrow::before { content:''; width:20px; height:2px; background:var(--lime); }
+
+.lp-title {
+  font-family: var(--noto); font-weight: 900;
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.15; color: var(--white);
+  margin-bottom: 20px;
+}
+.lp-title .lime { color: var(--lime); }
+.lp-title .red  { color: var(--red); }
+
+.lp-desc {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  line-height: 1.85; margin-bottom: 48px;
+}
+.lp-desc strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+
+/* Promise list */
+.promise-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+.promise-item {
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.pi-icon {
+  width: 36px; height: 36px; border-radius: 4px; flex-shrink: 0;
+  background: rgba(200,241,53,0.1);
+  border: 1px solid rgba(200,241,53,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.pi-text strong {
+  display: block; font-size: 14px; font-weight: 700; color: var(--white);
+  margin-bottom: 2px;
+}
+.pi-text span { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+.lp-brand {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.lp-brand .brand-line {
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.25);
+  letter-spacing: 0.06em;
+}
+.lp-brand .brand-name {
+  font-family: var(--bebas); font-size: 18px; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.2); margin-top: 4px;
+}
+.lp-brand .brand-name span { color: rgba(200,241,53,0.4); }
+
+/* ── RIGHT PANEL (FORM) ── */
+.right-panel {
+  background: var(--black);
+  padding: 60px 64px 80px 60px;
+  border-left: 1px solid var(--border);
+}
+
+.form-header { margin-bottom: 44px; }
+.form-step-bar {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 32px;
+}
+.step-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+}
+.step-dot.done  { background: var(--lime); color: var(--black); }
+.step-dot.active{ background: var(--lime); color: var(--black); }
+.step-dot.todo  { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.1); }
+.step-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.step-line.done { background: var(--lime); opacity: 0.4; }
+
+.form-title {
+  font-size: 22px; font-weight: 900; color: var(--white);
+  margin-bottom: 6px; line-height: 1.3;
+}
+.form-title span { color: var(--lime); }
+.form-subtitle { font-size: 14px; color: var(--gray); }
+
+/* Form fields */
+.form-body { display: flex; flex-direction: column; gap: 0; }
+
+.field-group {
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  animation: fadeUp .5s ease both;
+}
+.field-group:last-of-type { border-bottom: none; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.field-group:nth-child(1) { animation-delay:.05s; }
+.field-group:nth-child(2) { animation-delay:.1s; }
+.field-group:nth-child(3) { animation-delay:.15s; }
+.field-group:nth-child(4) { animation-delay:.2s; }
+.field-group:nth-child(5) { animation-delay:.25s; }
+.field-group:nth-child(6) { animation-delay:.3s; }
+.field-group:nth-child(7) { animation-delay:.35s; }
+
+label {
+  display: block;
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em; margin-bottom: 10px;
+}
+label .req { color: var(--lime); margin-left: 3px; }
+label .opt { color: var(--gray); font-weight: 400; font-size: 12px; margin-left: 4px; }
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  background: var(--black3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: var(--noto);
+  font-size: 15px;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color .2s, background .2s;
+  -webkit-appearance: none;
+}
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--lime);
+  background: rgba(200,241,53,0.04);
+}
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888882' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+select option { background: var(--black3); color: var(--white); }
+textarea { resize: vertical; min-height: 110px; line-height: 1.7; }
+
+/* Checkbox group */
+.check-group {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.check-label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  background: var(--black3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; cursor: pointer;
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.55);
+  transition: all .15s; user-select: none;
+}
+.check-label:hover { border-color: rgba(200,241,53,0.3); color: var(--white); }
+.check-label input[type="checkbox"] { display: none; }
+.check-label.checked {
+  background: var(--lime-pale);
+  border-color: rgba(200,241,53,0.5);
+  color: var(--lime);
+}
+.check-box-ui {
+  width: 18px; height: 18px; flex-shrink: 0; border-radius: 3px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.check-label.checked .check-box-ui {
+  background: var(--lime); border-color: var(--lime);
+}
+.check-box-ui::after {
+  content: ''; display: none;
+  width: 10px; height: 6px;
+  border-left: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  transform: rotate(-45deg) translateY(-1px);
+}
+.check-label.checked .check-box-ui::after { display: block; }
+
+/* Privacy */
+.privacy-row {
+  margin-top: 28px; padding: 20px;
+  background: var(--black3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.privacy-check {
+  width: 20px; height: 20px; flex-shrink: 0; border-radius: 3px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  cursor: pointer; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.privacy-check.checked { background: var(--lime); border-color: var(--lime); }
+.privacy-check.checked::after {
+  content: '✓'; font-size: 12px; font-weight: 800; color: var(--black);
+}
+.privacy-text { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.65; }
+.privacy-text strong { color: rgba(255,255,255,0.65); font-weight: 600; }
+.privacy-text a { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Submit */
+.submit-btn {
+  width: 100%; margin-top: 28px;
+  background: var(--lime); color: var(--black);
+  font-family: var(--noto); font-size: 16px; font-weight: 800;
+  padding: 20px; border-radius: 4px; border: none;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  letter-spacing: 0.02em;
+}
+.submit-btn:hover { background: #d4f748; transform: translateY(-2px); }
+.submit-btn:active { transform: translateY(0); }
+.submit-btn:disabled { background: rgba(200,241,53,0.3); color: rgba(0,0,0,0.4); cursor: not-allowed; transform: none; }
+
+.submit-note {
+  text-align: center; margin-top: 14px;
+  font-size: 12px; color: rgba(255,255,255,0.25);
+  line-height: 1.7;
+}
+
+/* ── SUCCESS STATE ── */
+.success-screen {
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 40px;
+  min-height: 500px;
+}
+.success-screen.show { display: flex; }
+.success-icon {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--lime);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; margin-bottom: 32px;
+  animation: popIn .5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(0.5); }
+  to   { opacity:1; transform:scale(1); }
+}
+.success-screen h2 {
+  font-size: 26px; font-weight: 900; color: var(--white);
+  margin-bottom: 14px; line-height: 1.3;
+}
+.success-screen h2 span { color: var(--lime); }
+.success-screen p {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  line-height: 1.85; max-width: 380px; margin-bottom: 8px;
+}
+.success-screen .next-step {
+  margin-top: 36px; padding: 24px 28px;
+  background: var(--black3);
+  border: 1px solid rgba(200,241,53,0.2);
+  border-radius: 6px; text-align: left; width: 100%; max-width: 400px;
+}
+.success-screen .next-step .ns-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--lime); margin-bottom: 10px;
+}
+.success-screen .next-step p {
+  font-size: 14px; color: rgba(255,255,255,0.6); margin: 0; max-width: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  .page { grid-template-columns: 1fr; }
+  .left-panel {
+    position: static; height: auto;
+    padding: 60px 24px 48px;
+  }
+  .right-panel { padding: 40px 24px 60px; border-left: none; border-top: 1px solid var(--border); }
+  .check-group { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="allday_landing.html" class="nav-logo">ALLDAY<span>✦</span>COMPANY</a>
+  <a href="allday_landing.html" class="nav-back">메인으로 돌아가기</a>
+</nav>
+
+<div class="page">
+
+  <!-- ── LEFT PANEL ── -->
+  <div class="left-panel">
+    <div class="lp-content">
+      <div class="lp-eyebrow">Free Diagnosis</div>
+      <h2 class="lp-title">
+        지금 바로<br>
+        <span class="lime">무료 광고 진단</span>을<br>
+        신청하세요.
+      </h2>
+      <p class="lp-desc">
+        광고비를 더 쓰기 전에,<br>
+        <strong>지금 어디서 문제가 생기는지</strong> 먼저 확인하세요.<br>
+        진단은 완전 무료입니다.
+      </p>
+
+      <div class="promise-list">
+        <div class="promise-item">
+          <div class="pi-icon">📋</div>
+          <div class="pi-text">
+            <strong>신청 후 영업일 1일 이내 연락</strong>
+            <span>전화 상담 일정을 빠르게 잡아드립니다</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="pi-icon">🔍</div>
+          <div class="pi-text">
+            <strong>광고 구조 전체를 무료로 진단</strong>
+            <span>광고·세일즈·사업 구조 3가지 영역 분석</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="pi-icon">💡</div>
+          <div class="pi-text">
+            <strong>성과 가능성 없으면 솔직하게 말씀드립니다</strong>
+            <span>불필요한 광고비 낭비를 막아드립니다</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="pi-icon">🤝</div>
+          <div class="pi-text">
+            <strong>강요 없는 상담</strong>
+            <span>진단 결과는 드리되, 계약 강요는 없습니다</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lp-brand">
+        <div class="brand-line">광고를 운영하지 않습니다. 매출구조를 설계합니다.</div>
+        <div class="brand-name">ALLDAY<span>✦</span>COMPANY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="right-panel">
+
+    <!-- 진행 바 -->
+    <div class="form-header">
+      <div class="form-step-bar">
+        <div class="step-dot active">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot todo">2</div>
+        <div class="step-line"></div>
+        <div class="step-dot todo">3</div>
+      </div>
+      <div class="form-title">신청서 작성 <span>· 무료</span></div>
+      <div class="form-subtitle">모든 항목은 상담 품질 향상을 위해서만 활용됩니다</div>
+    </div>
+
+    <!-- 폼 -->
+    <div class="form-body" id="formBody">
+
+      <!-- 이름 -->
+      <div class="field-group">
+        <label>이름 <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="홍길동" />
+      </div>
+
+      <!-- 연락처 -->
+      <div class="field-group">
+        <label>연락처 (전화번호) <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="010-0000-0000" />
+      </div>
+
+      <!-- 이메일 -->
+      <div class="field-group">
+        <label>이메일 <span class="opt">(선택)</span></label>
+        <input type="email" id="email" placeholder="example@email.com" />
+      </div>
+
+      <!-- 업종 -->
+      <div class="field-group">
+        <label>업종 / 사업 분야 <span class="req">*</span></label>
+        <select id="industry">
+          <option value="" disabled selected>업종을 선택해주세요</option>
+          <option>쇼핑몰 / 이커머스</option>
+          <option>병원 / 의원 / 클리닉</option>
+          <option>음식점 / 카페 / F&B</option>
+          <option>학원 / 교육</option>
+          <option>뷰티 / 헤어 / 네일</option>
+          <option>부동산 / 인테리어</option>
+          <option>IT / 소프트웨어 / SaaS</option>
+          <option>제조 / B2B</option>
+          <option>컨설팅 / 코칭 / 강의</option>
+          <option>기타 서비스업</option>
+          <option>직접 입력</option>
+        </select>
+      </div>
+
+      <!-- 월 광고비 -->
+      <div class="field-group">
+        <label>현재 월 광고비 규모 <span class="req">*</span></label>
+        <select id="budget">
+          <option value="" disabled selected>월 광고비를 선택해주세요</option>
+          <option>100만원 미만</option>
+          <option>100만원 ~ 300만원</option>
+          <option>300만원 ~ 500만원</option>
+          <option>500만원 ~ 1,000만원</option>
+          <option>1,000만원 ~ 3,000만원</option>
+          <option>3,000만원 이상</option>
+          <option>아직 광고를 시작 안 했습니다</option>
+        </select>
+      </div>
+
+      <!-- 광고 채널 -->
+      <div class="field-group">
+        <label>현재 사용 중인 광고 채널 <span class="opt">(복수 선택 가능)</span></label>
+        <div class="check-group" id="channelGroup">
+          <div class="check-label" data-val="네이버 검색광고">
+            <input type="checkbox"><div class="check-box-ui"></div>네이버 검색광고
+          </div>
+          <div class="check-label" data-val="네이버 쇼핑광고">
+            <input type="checkbox"><div class="check-box-ui"></div>네이버 쇼핑광고
+          </div>
+          <div class="check-label" data-val="카카오 광고">
+            <input type="checkbox"><div class="check-box-ui"></div>카카오 광고
+          </div>
+          <div class="check-label" data-val="인스타그램 / 페이스북">
+            <input type="checkbox"><div class="check-box-ui"></div>인스타그램 / 페이스북
+          </div>
+          <div class="check-label" data-val="유튜브 광고">
+            <input type="checkbox"><div class="check-box-ui"></div>유튜브 광고
+          </div>
+          <div class="check-label" data-val="틱톡 광고">
+            <input type="checkbox"><div class="check-box-ui"></div>틱톡 광고
+          </div>
+          <div class="check-label" data-val="구글 광고">
+            <input type="checkbox"><div class="check-box-ui"></div>구글 광고
+          </div>
+          <div class="check-label" data-val="광고 없음 / 시작 예정">
+            <input type="checkbox"><div class="check-box-ui"></div>광고 없음 / 시작 예정
+          </div>
+        </div>
+      </div>
+
+      <!-- 고민/문의 -->
+      <div class="field-group">
+        <label>고민 / 문의 내용 <span class="opt">(선택)</span></label>
+        <textarea id="inquiry" placeholder="현재 광고나 마케팅에서 가장 고민이 되는 부분을 자유롭게 적어주세요.&#10;예) 광고는 돌리는데 문의가 없어요 / 어떤 채널이 맞는지 모르겠어요 / 대행사를 바꾸고 싶어요"></textarea>
+      </div>
+
+      <!-- 개인정보 동의 -->
+      <div class="privacy-row" id="privacyRow">
+        <div class="privacy-check" id="privacyCheck"></div>
+        <div class="privacy-text">
+          <strong>[필수] 개인정보 수집 및 이용 동의</strong><br>
+          수집 항목: 이름, 연락처, 이메일, 사업 정보 · 수집 목적: 무료 광고 진단 상담 연결 · 보유 기간: 상담 완료 후 1년<br>
+          <a href="#">개인정보처리방침 전문 보기</a>
+        </div>
+      </div>
+
+      <!-- 제출 -->
+      <button class="submit-btn" id="submitBtn" disabled>
+        무료 광고 진단 신청하기 →
+      </button>
+      <div class="submit-note">
+        신청 후 영업일 1일 이내에 담당자가 직접 연락드립니다.<br>
+        강요나 스팸 연락은 절대 없습니다.
+      </div>
+
+    </div>
+
+    <!-- 완료 화면 -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>신청이 완료됐습니다! <span>🎉</span></h2>
+      <p>무료 광고 진단 신청을 해주셔서 감사합니다.</p>
+      <p>영업일 기준 <strong style="color:rgba(255,255,255,0.8)">1일 이내</strong>에 담당자가 직접 연락드려 전화 상담 일정을 잡아드리겠습니다.</p>
+      <div class="next-step">
+        <div class="ns-label">다음 단계</div>
+        <p>📞 담당자 전화 연락 → 상담 일정 확정 → 무료 진단 진행<br><br>
+        혹시 급하신 경우 카카오톡 채널 <strong style="color:rgba(255,255,255,0.8)">@alldaycompany</strong>로 먼저 연락 주셔도 됩니다.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // 체크박스 토글
+  document.querySelectorAll('.check-label').forEach(label => {
+    label.addEventListener('click', () => {
+      label.classList.toggle('checked');
+    });
+  });
+
+  // 개인정보 동의 토글
+  const privacyCheck = document.getElementById('privacyCheck');
+  const submitBtn = document.getElementById('submitBtn');
+  let privacyAgreed = false;
+
+  privacyCheck.addEventListener('click', () => {
+    privacyAgreed = !privacyAgreed;
+    privacyCheck.classList.toggle('checked', privacyAgreed);
+    submitBtn.disabled = !privacyAgreed;
+  });
+
+  // 전화번호 자동 하이픈
+  document.getElementById('phone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length <= 3) this.value = v;
+    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
+    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  });
+
+  // ─────────────────────────────────────────
+  // Netlify Function을 통해 노션 API 호출 (CORS 해결)
+  // ─────────────────────────────────────────
+
+  function showSuccess() {
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('successScreen').classList.add('show');
+    document.querySelectorAll('.step-dot').forEach(d => {
+      d.classList.remove('todo', 'active'); d.classList.add('done');
+    });
+    document.querySelectorAll('.step-line').forEach(l => l.classList.add('done'));
+    document.querySelector('.form-title').innerHTML = '신청 완료 <span>· 감사합니다</span>';
+    document.querySelector('.form-subtitle').textContent = '담당자가 곧 연락드리겠습니다';
+  }
+
+  // 제출
+  submitBtn.addEventListener('click', async () => {
+    const name     = document.getElementById('name').value.trim();
+    const phone    = document.getElementById('phone').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const industry = document.getElementById('industry').value;
+    const budget   = document.getElementById('budget').value;
+    const inquiry  = document.getElementById('inquiry').value.trim();
+
+    // 선택된 광고 채널
+    const channels = [...document.querySelectorAll('#channelGroup .check-label.checked')]
+      .map(el => el.dataset.val);
+
+    if (!name)     { alert('이름을 입력해주세요.');          return; }
+    if (!phone)    { alert('연락처를 입력해주세요.');         return; }
+    if (!industry) { alert('업종을 선택해주세요.');           return; }
+    if (!budget)   { alert('월 광고비 규모를 선택해주세요.'); return; }
+
+    submitBtn.textContent = '신청 중...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/notion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, industry, budget, channels, inquiry })
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        showSuccess();
+      } else {
+        alert(`저장 중 오류가 발생했습니다.\n${result.error || '잠시 후 다시 시도해주세요.'}`);
+        submitBtn.textContent = '무료 광고 진단 신청하기 →';
+        submitBtn.disabled = false;
+      }
+    } catch (e) {
+      alert('네트워크 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.');
+      submitBtn.textContent = '무료 광고 진단 신청하기 →';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

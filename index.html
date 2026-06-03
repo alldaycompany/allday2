@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALLDAY COMPANY — 매출구조를 설계하는 마케팅 파트너</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0A0A0A;
+  --black2:   #111111;
+  --black3:   #1A1A1A;
+  --white:    #FFFFFF;
+  --off:      #F5F5F2;
+  --lime:     #C8F135;
+  --lime-dim: #A8D120;
+  --lime-pale:#EEF9C0;
+  --red:      #E8321A;
+  --red-dim:  #C42A14;
+  --gray:     #888882;
+  --gray-lt:  #CCCCCA;
+  --border:   rgba(255,255,255,0.08);
+  --bebas:    'Bebas Neue', sans-serif;
+  --noto:     'Noto Sans KR', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--noto); background: var(--black); color: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 64px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--bebas); font-size: 20px; letter-spacing: 0.14em; color: var(--white); }
+.nav-logo span { color: var(--lime); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--lime); color: var(--black);
+  font-family: var(--noto); font-size: 13px; font-weight: 700;
+  padding: 10px 24px; border-radius: 2px;
+  text-decoration: none; transition: background .2s, transform .15s;
+}
+.nav-cta:hover { background: #d4f748; transform: translateY(-1px); }
+
+/* ── SECTIONS ── */
+section { padding: 120px 64px; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* ── SECTION 1: HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 120px;
+  background: var(--black);
+  position: relative; overflow: hidden;
+}
+.hero-bg-lime {
+  position: absolute; top: -180px; right: -180px;
+  width: 640px; height: 640px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,241,53,0.13) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-bg-red {
+  position: absolute; bottom: -80px; left: -80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,50,26,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(200,241,53,0.1);
+  border: 1px solid rgba(200,241,53,0.3);
+  color: var(--lime);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 28px;
+}
+.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--lime); animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: var(--noto); font-weight: 900;
+  font-size: clamp(28px, 3.6vw, 52px);
+  line-height: 1.18; margin-bottom: 10px; color: var(--white);
+}
+.hero h1 .accent { color: var(--lime); }
+.hero h1 .red    { color: var(--red); }
+
+.hero-hook {
+  font-size: 18px; font-weight: 700; color: var(--lime);
+  margin: 28px 0 16px;
+  padding-left: 18px;
+  border-left: 3px solid var(--lime);
+  line-height: 1.6;
+}
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,0.55);
+  line-height: 1.9; margin-bottom: 48px; max-width: 480px;
+}
+.hero-sub strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+.btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-lime {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--lime); color: var(--black);
+  font-size: 15px; font-weight: 800;
+  padding: 16px 34px; border-radius: 3px;
+  text-decoration: none; transition: all .2s;
+}
+.btn-lime:hover { background: #d4f748; transform: translateY(-2px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: rgba(255,255,255,0.65);
+  font-size: 15px; font-weight: 500;
+  padding: 16px 28px; border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none; transition: all .2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+/* Hero right — stat panel */
+.hero-panel {
+  background: var(--black3); border: 1px solid rgba(200,241,53,0.15);
+  border-radius: 8px; padding: 36px 32px;
+}
+.hero-panel .panel-title {
+  font-size: 22px; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--lime); line-height: 1.3;
+  margin-bottom: 24px;
+}
+.stat-item {
+  padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.stat-item:last-child { border-bottom: none; }
+.stat-icon {
+  width: 36px; height: 36px; border-radius: 4px; flex-shrink: 0;
+  background: rgba(200,241,53,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.stat-label { font-size: 12px; color: var(--gray); margin-bottom: 4px; }
+.stat-val { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.4; }
+
+/* ── SECTION 2: PAIN POINTS (HOOK) ── */
+.pain { background: var(--black2); }
+.sec-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--lime);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-eyebrow::before { content:''; width:20px; height:2px; background:var(--lime); }
+.sec-title {
+  font-family: var(--noto); font-weight: 900;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.sec-title .lime { color: var(--lime); }
+.sec-title .red  { color: var(--red); }
+.truth-title { font-size: clamp(26px, 3.4vw, 46px); }
+.mistake-title { font-size: clamp(22px, 3vw, 40px); }
+.pain-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.pain-card {
+  background: var(--black3);
+  padding: 40px 32px;
+  position: relative; overflow: hidden;
+  transition: background .2s;
+}
+.pain-card:hover { background: #1e1e1e; }
+.pain-card::before {
+  content: attr(data-n);
+  position: absolute; top: 16px; right: 20px;
+  font-family: var(--bebas); font-size: 80px;
+  color: rgba(200,241,53,0.06); line-height: 1;
+  pointer-events: none;
+}
+.pain-emoji { font-size: 28px; margin-bottom: 18px; }
+.pain-q {
+  font-size: 17px; font-weight: 800; color: var(--white);
+  line-height: 1.4; margin-bottom: 12px;
+}
+.pain-q span { color: var(--lime); }
+.pain-a { font-size: 14px; color: var(--gray); line-height: 1.75; }
+.pain-a strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+
+.pain-banner {
+  margin-top: 2px;
+  background: var(--red);
+  padding: 40px 48px;
+  display: flex; align-items: center; gap: 24px;
+}
+.pain-banner .pb-icon { font-size: 36px; flex-shrink: 0; }
+.pain-banner p {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 800; color: var(--white); line-height: 1.4;
+}
+.pain-banner p em { font-style: normal; color: var(--lime); }
+
+/* ── SECTION 3: TRUTH ── */
+.truth { background: var(--black); }
+.truth-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.checklist { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+.check-row {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: default;
+  transition: background .15s;
+}
+.check-row:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.check-row:hover { background: rgba(200,241,53,0.04); }
+.check-box {
+  width: 22px; height: 22px; border-radius: 3px; flex-shrink: 0;
+  border: 1.5px solid rgba(200,241,53,0.35);
+  display: flex; align-items: center; justify-content: center;
+}
+.check-row:hover .check-box { border-color: var(--lime); }
+.check-text { font-size: 15px; color: rgba(255,255,255,0.7); }
+.check-row:hover .check-text { color: var(--white); }
+
+.truth-right { padding-top: 8px; }
+.truth-big {
+  font-family: var(--noto); font-weight: 900;
+  font-size: clamp(26px, 3.2vw, 44px);
+  line-height: 1.2; color: var(--white);
+  margin-bottom: 28px;
+}
+.truth-big .lime { color: var(--lime); }
+.truth-big .red  { color: var(--red); }
+.truth-desc {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  line-height: 1.85; margin-bottom: 36px;
+}
+.truth-desc strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+.truth-callout {
+  background: var(--black3);
+  border-left: 4px solid var(--lime);
+  padding: 28px 28px;
+  border-radius: 0 4px 4px 0;
+}
+.truth-callout p { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 500; }
+.truth-callout .sub { font-size: 13px; color: var(--gray); margin-top: 10px; line-height: 1.7; }
+
+/* ── SECTION 4: DIAGNOSIS ── */
+.diag { background: var(--black2); }
+.diag-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 60px;
+}
+.diag-col {
+  background: var(--black3);
+  padding: 40px 32px;
+  transition: background .2s;
+}
+.diag-col:hover { background: #1e1e1e; }
+.diag-num { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: var(--lime); margin-bottom: 12px; }
+.diag-col h3 {
+  font-size: 22px; font-weight: 800; color: var(--white);
+  margin-bottom: 8px; line-height: 1.2;
+}
+.diag-col .diag-hook {
+  font-size: 13px; color: var(--lime);
+  font-weight: 600; margin-bottom: 24px; line-height: 1.5;
+}
+.diag-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.diag-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,0.5);
+  padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  line-height: 1.5;
+}
+.diag-list li:last-child { border-bottom: none; }
+.diag-list li::before { content:'→'; color: var(--lime); font-size: 12px; margin-top: 1px; flex-shrink: 0; }
+
+/* ── SECTION 5: COMPARE ── */
+.compare { background: var(--black); }
+.compare-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-top: 56px; border-radius: 4px; overflow: hidden;
+}
+.cmp-col { padding: 0; }
+.cmp-head {
+  padding: 22px 32px;
+  font-size: 14px; font-weight: 800; letter-spacing: 0.08em;
+}
+.cmp-head.generic { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.35); }
+.cmp-head.allday  { background: var(--lime); color: var(--black); }
+.cmp-row {
+  display: flex; align-items: center;
+  padding: 18px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 15px;
+  transition: background .15s;
+}
+.cmp-row:last-child { border-bottom: none; }
+.cmp-col.generic .cmp-row { color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.02); }
+.cmp-col.generic .cmp-row:hover { background: rgba(255,255,255,0.04); }
+.cmp-col.allday  .cmp-row { color: var(--white); font-weight: 600; background: rgba(200,241,53,0.04); }
+.cmp-col.allday  .cmp-row:hover { background: rgba(200,241,53,0.08); }
+.cmp-col.allday  .cmp-row::before { content:'✦'; color: var(--lime); font-size: 11px; margin-right: 12px; }
+
+/* ── SECTION 6: 4 PILLARS ── */
+.pillars { background: var(--black2); }
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 2px; margin-top: 60px;
+}
+.pillar {
+  background: var(--black3);
+  padding: 48px 40px;
+  position: relative; overflow: hidden;
+  transition: background .2s;
+}
+.pillar:hover { background: #1d1d1d; }
+.pillar-n {
+  font-family: var(--bebas); font-size: 100px;
+  position: absolute; bottom: -10px; right: 20px;
+  color: rgba(200,241,53,0.05); line-height: 1;
+  pointer-events: none;
+}
+.pillar-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--black); background: var(--lime);
+  padding: 4px 12px; border-radius: 2px; margin-bottom: 16px;
+}
+.pillar h3 { font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+.pillar .pillar-hook { font-size: 14px; color: var(--lime); font-weight: 600; margin-bottom: 16px; line-height: 1.5; }
+.pillar p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+.pillar .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pillar .tag {
+  font-size: 12px; font-weight: 700; color: var(--black);
+  background: var(--lime); padding: 4px 12px; border-radius: 2px;
+}
+
+/* ── SECTION 7: MISTAKE ── */
+.mistake { background: var(--black); }
+.mistake-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.mistake-visual {
+  background: var(--black3); border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.07); padding: 40px 36px;
+}
+.mv-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; }
+.mv-bad { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 10px; }
+.mv-arrow { font-size: 24px; color: var(--lime); margin: 14px 0; }
+.mv-items { display: flex; flex-direction: column; gap: 8px; }
+.mv-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 18px; background: rgba(255,255,255,0.03);
+  border-radius: 3px; border: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.75);
+  transition: border-color .15s, background .15s;
+}
+.mv-item:hover { border-color: rgba(200,241,53,0.3); background: rgba(200,241,53,0.04); }
+.mv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); flex-shrink: 0; }
+
+/* ── SECTION 8: PROCESS ── */
+.process { background: var(--black2); }
+.process-steps {
+  display: grid; grid-template-columns: repeat(6,1fr);
+  gap: 0; margin-top: 64px; position: relative;
+}
+.process-steps::before {
+  content: ''; position: absolute; top: 27px; left: 0; right: 0;
+  height: 1px; background: rgba(200,241,53,0.15);
+}
+.pstep { padding: 0 14px; }
+.pstep-num {
+  width: 54px; height: 54px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800;
+  position: relative; z-index: 1; margin-bottom: 22px;
+}
+.pstep-num.active { background: var(--lime); color: var(--black); }
+.pstep-num.inactive {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.pstep h4 { font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+.pstep p  { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+/* ── SECTION 9: WHO ── */
+.who { background: var(--black); }
+.who-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.who-quote {
+  font-size: clamp(26px, 3vw, 40px); font-weight: 900;
+  color: var(--white); line-height: 1.2;
+  border-left: 4px solid var(--lime);
+  padding-left: 24px;
+}
+.who-quote span { color: var(--lime); }
+.who-text p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 18px; }
+.who-text strong { color: var(--white); font-weight: 700; }
+.who-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.who-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(200,241,53,0.08);
+  border: 1px solid rgba(200,241,53,0.2);
+  color: var(--lime); font-size: 13px; font-weight: 700;
+  padding: 8px 16px; border-radius: 100px;
+}
+
+/* ── SECTION 10: STORY ── */
+.story { background: var(--black2); text-align: center; }
+.story-center { max-width: 680px; margin: 0 auto; }
+.story-num {
+  font-family: var(--bebas); font-size: 120px; color: rgba(200,241,53,0.08);
+  line-height: 1; margin-bottom: 24px; letter-spacing: -2px;
+}
+.story h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 900; color: var(--white); margin-bottom: 24px; line-height: 1.2; }
+.story h2 span { color: var(--lime); }
+.story p { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.9; margin-bottom: 14px; }
+.story .story-vow {
+  margin-top: 44px; padding: 32px 44px;
+  background: rgba(200,241,53,0.06);
+  border: 1px solid rgba(200,241,53,0.2);
+  border-radius: 4px;
+  font-size: 17px; font-weight: 700; color: var(--white);
+  line-height: 1.7;
+}
+.story .story-vow em { font-style: normal; color: var(--lime); }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  background: var(--lime);
+  padding: 140px 64px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: 'ALLDAY';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: var(--bebas); font-size: 280px;
+  color: rgba(0,0,0,0.06); white-space: nowrap; pointer-events: none;
+  line-height: 1;
+}
+.final-cta .fc-label {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(0,0,0,0.45);
+  margin-bottom: 24px;
+}
+.final-cta h2 {
+  font-size: clamp(32px, 5vw, 62px); font-weight: 900;
+  color: var(--black); line-height: 1.15; margin-bottom: 16px;
+}
+.final-cta .fc-sub {
+  font-size: 16px; color: rgba(0,0,0,0.55);
+  margin-bottom: 48px; line-height: 1.7;
+}
+.btn-black {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--black); color: var(--lime);
+  font-size: 16px; font-weight: 800;
+  padding: 20px 44px; border-radius: 3px;
+  text-decoration: none; transition: all .2s;
+}
+.btn-black:hover { background: #1a1a1a; transform: translateY(-2px); }
+
+.brand-stmt {
+  margin-top: 80px; padding-top: 48px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+}
+.brand-stmt .bs-main {
+  font-size: clamp(22px, 3vw, 36px); font-weight: 900;
+  color: var(--black); line-height: 1.25; margin-bottom: 14px;
+}
+.brand-stmt .bs-tags {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+  font-size: 14px; font-weight: 700;
+  color: rgba(0,0,0,0.4); margin-bottom: 20px;
+}
+.brand-stmt .bs-tags .x { color: rgba(0,0,0,0.2); }
+.brand-stmt .bs-name {
+  font-family: var(--bebas); font-size: 18px; letter-spacing: 0.2em;
+  color: rgba(0,0,0,0.35);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #050505;
+  padding: 36px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.f-logo { font-family: var(--bebas); font-size: 16px; letter-spacing: 0.14em; color: rgba(255,255,255,0.2); }
+.f-logo span { color: rgba(200,241,53,0.4); }
+footer p { font-size: 12px; color: rgba(255,255,255,0.15); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-badge { animation: fadeUp .6s ease both .1s; }
+.hero h1    { animation: fadeUp .7s ease both .22s; }
+.hero-hook  { animation: fadeUp .7s ease both .34s; }
+.hero-sub   { animation: fadeUp .7s ease both .44s; }
+.btn-group  { animation: fadeUp .7s ease both .54s; }
+.hero-panel { animation: fadeUp .7s ease both .3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  section { padding: 80px 24px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-panel { display: none; }
+  .pain-grid, .diag-grid, .pillars-grid { grid-template-columns: 1fr; }
+  .compare-wrap { grid-template-columns: 1fr; }
+  .mistake-inner, .who-inner, .truth-inner { grid-template-columns: 1fr; gap: 40px; }
+  .process-steps { grid-template-columns: repeat(2,1fr); gap: 32px 16px; }
+  .process-steps::before { display: none; }
+  footer { padding: 28px 24px; }
+  .final-cta { padding: 100px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ALLDAY<span>✦</span>COMPANY</div>
+  <a href="allday_form.html" class="nav-cta">무료 진단 신청 →</a>
+</nav>
+
+<!-- ── S1. HERO ── -->
+<section class="hero">
+  <div class="hero-bg-lime"></div>
+  <div class="hero-bg-red"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">AI × Funnel × Vibe Marketing Agency</div>
+        <h1>
+          매출이 정체되어 있으신가요?<br>
+          광고효과가 없으신가요?<br>
+          <span class="accent">이유가 있습니다.</span>
+        </h1>
+        <div class="hero-hook">
+          "광고만 바꿔봤는데 소용없었어요."<br>
+          그건 광고 문제가 아니기 때문입니다.
+        </div>
+        <p class="hero-sub">
+          ALLDAY COMPANY는 광고를 시작하기 전에<br>
+          <strong>매출이 안 나오는 진짜 이유</strong>를 먼저 찾습니다.<br>
+          문제를 알면 해결책은 명확해집니다.
+        </p>
+        <div class="btn-group">
+          <a href="allday_form.html" class="btn-lime">무료 광고 진단 받기 →</a>
+          <a href="#pain" class="btn-ghost">내 사업 문제점 확인하기</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">지금 이 문제를 겪고 계신가요?</div>
+        <div class="stat-item">
+          <div class="stat-icon">📉</div>
+          <div><div class="stat-label">광고비 투입 대비 매출</div><div class="stat-val">광고비는 늘었는데 매출은 제자리</div></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">🔁</div>
+          <div><div class="stat-label">대행사 교체</div><div class="stat-val">대행사를 바꿔도 결과가 달라지지 않음</div></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">❓</div>
+          <div><div class="stat-label">광고 성과 파악</div><div class="stat-val">어디서 문제가 생기는지 모름</div></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">💸</div>
+          <div><div class="stat-label">예산 낭비</div><div class="stat-val">클릭은 오는데 문의·구매로 안 이어짐</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S2. PAIN POINTS ── -->
+<section class="pain" id="pain">
+  <div class="container">
+    <div class="sec-eyebrow">The Real Problem</div>
+    <h2 class="sec-title">
+      혹시 지금<br>
+      이런 상황 <span class="lime">아닌가요?</span>
+    </h2>
+    <div class="pain-grid">
+      <div class="pain-card" data-n="01">
+        <div class="pain-emoji">😤</div>
+        <div class="pain-q">"대행사를 세 번 바꿨는데<br><span>아직도 매출이 그대로에요"</span></div>
+        <div class="pain-a">문제는 대행사가 아닙니다. <strong>광고 이전 구조</strong>가 잘못됐을 가능성이 높습니다.</div>
+      </div>
+      <div class="pain-card" data-n="02">
+        <div class="pain-emoji">💰</div>
+        <div class="pain-q">"클릭은 오는데<br><span>왜 문의가 없을까요?"</span></div>
+        <div class="pain-a">클릭 이후의 여정에 문제가 있습니다. <strong>랜딩페이지, 신뢰 요소, 전환 설계</strong>를 먼저 진단해야 합니다.</div>
+      </div>
+      <div class="pain-card" data-n="03">
+        <div class="pain-emoji">📊</div>
+        <div class="pain-q">"보고서는 매달 오는데<br><span>매출은 왜 모르겠죠?"</span></div>
+        <div class="pain-a">클릭·노출 보고는 의미없습니다. <strong>매출과 연결된 데이터</strong>를 봐야 합니다.</div>
+      </div>
+      <div class="pain-card" data-n="04">
+        <div class="pain-emoji">🤷</div>
+        <div class="pain-q">"광고비를 얼마나 써야<br><span>효과가 있을지 모르겠어요"</span></div>
+        <div class="pain-a">광고비 크기가 문제가 아닙니다. <strong>구조 없이 쓰는 광고비</strong>는 규모와 무관하게 낭비됩니다.</div>
+      </div>
+      <div class="pain-card" data-n="05">
+        <div class="pain-emoji">🔄</div>
+        <div class="pain-q">"광고 소재만 계속 바꾸고<br><span>있는 것 같아서 불안해요"</span></div>
+        <div class="pain-a">소재 교체는 임시방편입니다. <strong>퍼널 전체를 설계</strong>하면 소재가 달라져도 성과가 쌓입니다.</div>
+      </div>
+      <div class="pain-card" data-n="06">
+        <div class="pain-emoji">😩</div>
+        <div class="pain-q">"뭐가 문제인지 말해주는<br><span>곳이 없었어요"</span></div>
+        <div class="pain-a">대부분의 대행사는 광고 운영만 합니다. ALLDAY는 <strong>문제를 먼저 찾고 솔직하게</strong> 말합니다.</div>
+      </div>
+    </div>
+    <div class="pain-banner">
+      <div class="pb-icon">💡</div>
+      <p>광고는 문제를 해결하지 않습니다. <em>광고는 문제를 증폭시킵니다.</em><br>좋은 구조엔 성장을, 나쁜 구조엔 낭비를 키웁니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S3. TRUTH ── -->
+<section class="truth">
+  <div class="container">
+    <div class="truth-inner">
+      <div>
+        <div class="sec-eyebrow">Root Cause</div>
+        <h2 class="sec-title truth-title">광고 성과 부진,<br>진짜 원인은 <span class="lime">여기</span>있습니다</h2>
+        <div class="checklist">
+          <div class="check-row"><div class="check-box"></div><span class="check-text">고객이 원하는 메시지가 없는 콘텐츠</span></div>
+          <div class="check-row"><div class="check-box"></div><span class="check-text">클릭 이후 이탈을 부르는 랜딩페이지</span></div>
+          <div class="check-row"><div class="check-box"></div><span class="check-text">신뢰를 만들지 못하는 후기·증거 부족</span></div>
+          <div class="check-row"><div class="check-box"></div><span class="check-text">엉뚱한 사람에게 보여지는 잘못된 타겟</span></div>
+          <div class="check-row"><div class="check-box"></div><span class="check-text">유입 이후 고객을 놓치는 관리 프로세스 부재</span></div>
+          <div class="check-row"><div class="check-box"></div><span class="check-text">가격·상품 경쟁력 미검토 상태의 광고 집행</span></div>
+        </div>
+      </div>
+      <div class="truth-right">
+        <div class="truth-big">
+          옆에 항목 중 하나라도<br>해당된다면<br>
+          <span class="red">지금 광고비는<br>낭비되고 있습니다.</span>
+        </div>
+        <p class="truth-desc">
+          대부분의 광고대행사는 이 문제를 말하지 않습니다.<br>
+          광고를 더 쓰게 만드는 것이 대행사의 수익이기 때문입니다.<br><br>
+          <strong>ALLDAY COMPANY는 성과 가능성이 없다고 판단되면<br>광고 진행을 권하지 않습니다.</strong>
+        </p>
+        <div class="truth-callout">
+          <p>"우리는 광고비를 태우는 회사가 아닙니다.<br>매출구조를 설계하는 회사입니다."</p>
+          <div class="sub">— ALLDAY COMPANY 대표, 종일</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S4. DIAGNOSIS ── -->
+<section class="diag" id="diagnosis">
+  <div class="container">
+    <div class="sec-eyebrow">Our Approach</div>
+    <h2 class="sec-title">
+      광고보다 먼저<br>
+      <span class="lime">사업 구조를 진단합니다</span>
+    </h2>
+    <div class="diag-grid">
+      <div class="diag-col">
+        <div class="diag-num">01 / 마케팅 진단</div>
+        <h3>Marketing Diagnosis</h3>
+        <div class="diag-hook">광고를 켜기 전에 구멍부터 막습니다</div>
+        <ul class="diag-list">
+          <li>광고 데이터 및 성과 분석</li>
+          <li>경쟁사 포지셔닝 분석</li>
+          <li>고객 유입 동선 분석</li>
+          <li>랜딩페이지 UX 진단</li>
+          <li>전환율(CVR) 분석</li>
+        </ul>
+      </div>
+      <div class="diag-col">
+        <div class="diag-num">02 / 세일즈 진단</div>
+        <h3>Sales Diagnosis</h3>
+        <div class="diag-hook">문의가 와도 계약이 안 된다면 여기서 막힙니다</div>
+        <ul class="diag-list">
+          <li>문의 응대 품질 분석</li>
+          <li>상담 및 클로징 프로세스</li>
+          <li>고객 이탈 구간 파악</li>
+        </ul>
+      </div>
+      <div class="diag-col">
+        <div class="diag-num">03 / 사업 진단</div>
+        <h3>Business Diagnosis</h3>
+        <div class="diag-hook">광고가 아무리 좋아도 상품이 약하면 안 됩니다</div>
+        <ul class="diag-list">
+          <li>가격 경쟁력 검토</li>
+          <li>상품·서비스 경쟁력 분석</li>
+          <li>시장 내 포지셔닝 전략</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S5. COMPARE ── -->
+<section class="compare">
+  <div class="container">
+    <div class="sec-eyebrow">Why Different</div>
+    <h2 class="sec-title">일반 대행사와<br><span class="lime">무엇이 다른가요?</span></h2>
+    <div class="compare-wrap">
+      <div class="cmp-col generic">
+        <div class="cmp-head generic">일반 광고대행사</div>
+        <div class="cmp-row">광고 운영</div>
+        <div class="cmp-row">클릭수·노출 보고</div>
+        <div class="cmp-row">광고 채널만 관리</div>
+        <div class="cmp-row">월간 보고서</div>
+        <div class="cmp-row">대행사 중심 관계</div>
+        <div class="cmp-row">광고 성과 지표</div>
+        <div class="cmp-row">광고비 증액 권유</div>
+      </div>
+      <div class="cmp-col allday">
+        <div class="cmp-head allday">ALLDAY COMPANY ✦</div>
+        <div class="cmp-row">사업 성장 관리</div>
+        <div class="cmp-row">매출 연결 분석 보고</div>
+        <div class="cmp-row">전체 퍼널 관리</div>
+        <div class="cmp-row">지속적 데이터 분석</div>
+        <div class="cmp-row">성장 파트너 관계</div>
+        <div class="cmp-row">사업 성과 지표</div>
+        <div class="cmp-row">성과 가능성 먼저 진단</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S6. 4 PILLARS ── -->
+<section class="pillars">
+  <div class="container">
+    <div class="sec-eyebrow">Our Strategy</div>
+    <h2 class="sec-title">성과를 만드는<br><span class="lime">4가지 전략</span></h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-n">01</div>
+        <div class="pillar-tag">Funnel Marketing</div>
+        <h3>퍼널 마케팅</h3>
+        <div class="pillar-hook">"클릭까지는 오는데 왜 안 살까요?" — 그 다음을 설계합니다</div>
+        <p>인지 → 관심 → 고려 → 전환 → 재구매까지, 고객이 이탈하는 모든 구간을 찾아 막습니다. 광고 클릭 이후의 여정을 데이터로 설계합니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">02</div>
+        <div class="pillar-tag">Vibe Marketing</div>
+        <h3>바이브 마케팅</h3>
+        <div class="pillar-hook">"왜 저 브랜드는 설명 안 해도 사고 싶을까요?" — 그 분위기를 만듭니다</div>
+        <p>AI 시대엔 광고보다 브랜드 분위기가 구매를 결정합니다. 고객이 '이 브랜드에서 사고 싶다'는 감각을 전략적으로 설계합니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">03</div>
+        <div class="pillar-tag">AI Marketing</div>
+        <h3>AI 마케팅</h3>
+        <div class="pillar-hook">경쟁사보다 10배 빠르게 움직입니다</div>
+        <p>AI를 활용해 마케팅 전 과정의 효율을 극대화합니다.</p>
+        <div class="tags">
+          <span class="tag">콘텐츠 제작</span>
+          <span class="tag">광고 분석</span>
+          <span class="tag">고객 관리</span>
+          <span class="tag">업무 자동화</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">04</div>
+        <div class="pillar-tag">Data-Driven</div>
+        <h3>데이터 기반 의사결정</h3>
+        <div class="pillar-hook">"감으로 하는 마케팅은 도박입니다" — 데이터로만 움직입니다</div>
+        <p>모든 전략은 데이터에서 시작하고, 모든 결과는 숫자로 증명합니다. 감이 아닌 근거로 예산을 집행합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S7. MISTAKE ── -->
+<section class="mistake">
+  <div class="container">
+    <div class="mistake-inner">
+      <div>
+        <div class="sec-eyebrow">Common Mistake</div>
+        <h2 class="sec-title mistake-title">
+          광고는 돌리는데<br>
+          <span class="red">유입이 없거나,</span><br>
+          <span class="lime">매출로 전환이 안되시죠?</span>
+        </h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.5);line-height:1.85;margin-top:20px;margin-bottom:24px;">
+          일반적인 광고대행사에서 광고를 대신해주는 경우<br>
+          광고소재의 퀄리티도 문제지만 옆의 항목을 신경쓰지 않아<br>
+          광고효율이 떨어지는 경우가 훨씬 더 많습니다.
+        </p>
+        <p style="font-size:15px;color:var(--white);font-weight:700;line-height:1.8;">
+          ALLDAY COMPANY는 광고만 보는 것이 아니라<br>
+          매출이 발생하는 <span style="color:var(--lime)">전체 과정을 함께 봅니다.</span>
+        </p>
+      </div>
+      <div class="mistake-visual">
+        <div class="mv-label">실제 문제 발생 구간</div>
+        <div class="mv-bad">✕ 광고 성과 부진</div>
+        <div class="mv-arrow">↓ 진짜 문제는 여기</div>
+        <div class="mv-items">
+          <div class="mv-item"><div class="mv-dot"></div>랜딩페이지 구조 & UX</div>
+          <div class="mv-item"><div class="mv-dot"></div>제안서 및 가격 설계</div>
+          <div class="mv-item"><div class="mv-dot"></div>후기·신뢰 요소 부족</div>
+          <div class="mv-item"><div class="mv-dot"></div>상담 스크립트 & 클로징</div>
+          <div class="mv-item"><div class="mv-dot"></div>고객 관리 프로세스</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S8. PROCESS ── -->
+<section class="process">
+  <div class="container">
+    <div class="sec-eyebrow">How We Work</div>
+    <h2 class="sec-title">성과가 나는<br><span class="lime">6단계 프로세스</span></h2>
+    <div class="process-steps">
+      <div class="pstep">
+        <div class="pstep-num active">01</div>
+        <h4>무료 진단</h4>
+        <p>현재 구조와 광고 현황 전수 진단</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num inactive">02</div>
+        <h4>시장 분석</h4>
+        <p>경쟁사·타겟 심층 분석</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num inactive">03</div>
+        <h4>퍼널 설계</h4>
+        <p>전환 최적화 전략 수립</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num active">04</div>
+        <h4>광고 집행</h4>
+        <p>설계 기반 정밀 광고 운영</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num inactive">05</div>
+        <h4>데이터 분석</h4>
+        <p>매출 연결 성과 추적</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num inactive">06</div>
+        <h4>지속 개선</h4>
+        <p>데이터 기반 반복 최적화</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S9. WHO ── -->
+<section class="who">
+  <div class="container">
+    <div class="who-inner">
+      <div>
+        <div class="sec-eyebrow">Our Standard</div>
+        <blockquote class="who-quote">
+          성과 가능성이 없다면<br>
+          <span>광고 진행을<br>권하지 않습니다.</span>
+        </blockquote>
+      </div>
+      <div class="who-text">
+        <p>
+          ALLDAY COMPANY는<br>
+          <strong>광고비를 소진하는 회사가 아닙니다.</strong>
+        </p>
+        <p>
+          함께하는 광고주가 성장해야<br>
+          우리도 성장한다고 생각합니다.<br>
+          그래서 우리가 선택하는 파트너는<br>
+          <strong>'비용 집행처'가 아닌 '성장 파트너'입니다.</strong>
+        </p>
+        <p>성과를 만들 수 있는 구조가 갖춰진 광고주,<br>또는 우리와 함께 그 구조를 만들어갈 의지가 있는 광고주와 함께합니다.</p>
+        <div class="who-badge-row">
+          <div class="who-badge">✦ 퍼널 마케팅</div>
+          <div class="who-badge">✦ 바이브 마케팅</div>
+          <div class="who-badge">✦ AI 마케팅</div>
+          <div class="who-badge">✦ 데이터 기반</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S10. STORY ── -->
+<section class="story">
+  <div class="container">
+    <div class="story-center">
+      <div class="story-num">鐘一</div>
+      <h2>ALLDAY는<br><span>대표의 이름</span>에서 시작됐습니다</h2>
+      <p>대표 이름 '종일(鐘一)'에서 비롯된 이름입니다.</p>
+      <p><strong style="color:rgba(255,255,255,.85)">하루 종일. 끝까지. 성과가 날 때까지.</strong></p>
+      <p>광고를 대신 운영해드리는 게 아니라,<br>고객의 사업이 실제로 성장하는 것을 목표로 합니다.</p>
+      <div class="story-vow">
+        광고를 운영하지 않습니다.<br>
+        <em>매출구조를 설계합니다.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta" id="cta">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="fc-label">Free Diagnosis · 지금 바로 시작하세요</div>
+    <h2>광고비를 더 쓰기 전에<br>지금 문제부터 확인하세요.</h2>
+    <p class="fc-sub">진단은 무료입니다. 불필요한 광고비 낭비를 먼저 막습니다.</p>
+    <a href="allday_form.html" class="btn-black">무료 광고 진단 신청하기 →</a>
+    <div class="brand-stmt">
+      <div class="bs-main">
+        광고를 운영하지 않습니다.<br>매출구조를 설계합니다.
+      </div>
+      <div class="bs-tags">
+        퍼널 마케팅 <span class="x">×</span> 바이브 마케팅 <span class="x">×</span> AI 마케팅
+      </div>
+      <div class="bs-name">ALLDAY COMPANY</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">ALLDAY<span>✦</span>COMPANY</div>
+  <p>© 2025 ALLDAY COMPANY. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
