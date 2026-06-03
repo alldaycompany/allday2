@@ -944,5 +944,94 @@ footer p { font-size: 12px; color: rgba(255,255,255,0.15); }
   <p>© 2025 ALLDAY COMPANY. All rights reserved.</p>
 </footer>
 
-</body>
-</html>
+<!-- 돈 떨어지는 효과 -->
+<canvas id="moneyCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99;"></canvas>
+
+<script>
+const canvas = document.getElementById('moneyCanvas');
+const ctx    = canvas.getContext('2d');
+
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const billImg = new Image();
+billImg.src   = '/50000won.jpg';
+
+const bills  = [];
+const COUNT  = 14;
+
+function rnd(a, b) { return a + Math.random() * (b - a); }
+
+class Bill {
+  constructor(init = false) { this.reset(init); }
+
+  reset(init = false) {
+    this.x        = rnd(20, canvas.width - 20);
+    this.y        = init ? rnd(-canvas.height, -20) : rnd(-260, -60);
+    this.w        = rnd(130, 200);
+    this.h        = this.w * 0.48;
+    this.speed    = rnd(1.0, 2.4);
+    this.drift    = rnd(-0.5, 0.5);
+    this.rot      = rnd(-0.5, 0.5);
+    this.rotSpeed = rnd(-0.012, 0.012);
+    this.swing    = rnd(0.2, 0.8);
+    this.swingT   = rnd(0, Math.PI * 2);
+    this.opacity  = rnd(0.65, 0.95);
+    /* 가끔 뒤집힌 뒷면처럼 보이게 scaleX 음수 */
+    this.flipX    = Math.random() < 0.3 ? -1 : 1;
+  }
+
+  update() {
+    this.swingT += 0.022;
+    this.x      += this.drift + Math.sin(this.swingT) * this.swing;
+    this.y      += this.speed;
+    this.rot    += this.rotSpeed;
+    if (this.y > canvas.height + 120) this.reset();
+  }
+
+  draw() {
+    if (!billImg.complete || billImg.naturalWidth === 0) return;
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.scale(this.flipX, 1);
+    ctx.globalAlpha = this.opacity;
+
+    /* 살짝 구부러진 느낌 — 좌우 끝을 위로 올림 */
+    ctx.beginPath();
+    ctx.moveTo(-this.w / 2, -this.h * 0.05);
+    ctx.quadraticCurveTo(0, -this.h / 2, this.w / 2, -this.h * 0.05);
+    ctx.lineTo(this.w / 2, this.h / 2);
+    ctx.quadraticCurveTo(0, this.h * 0.55, -this.w / 2, this.h / 2);
+    ctx.closePath();
+    ctx.clip();
+
+    ctx.drawImage(billImg, -this.w / 2, -this.h / 2, this.w, this.h);
+
+    ctx.restore();
+  }
+}
+
+billImg.onload = () => {
+  for (let i = 0; i < COUNT; i++) bills.push(new Bill(true));
+  animate();
+};
+
+/* 이미지 로드 실패 시에도 동작 */
+billImg.onerror = () => {
+  for (let i = 0; i < COUNT; i++) bills.push(new Bill(true));
+  animate();
+};
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  bills.forEach(b => { b.update(); b.draw(); });
+  requestAnimationFrame(animate);
+}
+</script>
+
